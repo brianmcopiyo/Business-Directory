@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use App\Models\Customer;
 use App\Models\Payment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -61,8 +62,9 @@ class CustomerController extends Controller
       $table = $customer->businesses()->orderByDesc('id')->paginate(25);
       $payments = $customer->businesses()->select(['id'])->get();
       $table2 = Payment::orderByDesc('id')->whereIn('business_id', $payments)->paginate(25);
+      $table3 = Product::orderByDesc('id')->whereIn('business_id', $payments)->paginate(25);
 
-      return view('app.customers.show', compact('table', 'table2', 'customer', 'search'));
+      return view('app.customers.show', compact('table', 'table2', 'table3', 'customer', 'search'));
     }
 
     return back()->with('error', "This customer wasn't found.");

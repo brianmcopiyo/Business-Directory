@@ -5,6 +5,7 @@ use App\Http\Middleware\APITokenMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Route::middleware([APITokenMiddleware::class])->group(function () {
 
   //Subscription
   Route::post('renew', [SubscriptionController::class, "renew"]);
+
+  //Products
+  Route::post('newproduct', [ProductController::class, "store"]);
 });
 
 // Fallback

@@ -132,6 +132,11 @@ $layout = $settings->layout;
                     <i class="ti ti-credit-card-pay mx-2"></i>
                     Payments</a>
                 </li>
+                <li class="nav-item">
+                  <a href="#tab-3" class="nav-link" data-bs-toggle="tab"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                    <i class="ti ti-building-store mx-2"></i>
+                    Products</a>
+                </li>
               </ul>
             </div>
             <div class="card-body">
@@ -230,6 +235,52 @@ $layout = $settings->layout;
                     </table>
                   </div>
                   @include("partial.pagination2")
+                </div>
+              </div>
+              <div class="tab-content p-0">
+                <div class="tab-pane show" id="tab-3">
+                  <div class="d-flex justify-content-between">
+                    <h4>Products</h4>
+                  </div>
+                  <div class="table" style="overflow-x: auto;">
+                    <table class="table card-table table-vcenter text-nowrap datatable">
+                      <thead>
+                        <tr>
+                          <th class="w-1">
+                            <input class="form-check-input m-0 align-middle headerCheckbox" type="checkbox" aria-label="Select all items">
+                          </th>
+                          <th class="w-1"></th>
+                          <th>SKU</th>
+                          <th>Name</th>
+                          <th>Stock</th>
+                          <th>Amount</th>
+                          <th>Description</th>
+                          <th>Status</th>
+                          <th>Created At</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($table3 as $count=>$row)
+                        <tr>
+                          <td>
+                            <input class="form-check-input m-0 align-middle rowCheckbox" type="checkbox" aria-label="Select invoice">
+                          </td>
+                          <td><span class="text-secondary">{{ $count + 1 + (($table3->currentPage() - 1) * 15) }}</span></td>
+                          <td>{{ $row->sku }}</td>
+                          <td>{{ $row->name }}</td>
+                          <td>{{ $row->stock }}</td>
+                          <td>&euro; {{ $row->price }}</td>
+                          <td>{{ $row->description }}</td>
+                          <td>
+                            <span class="badge bg-{{ $row->status == 'Active' ? 'success' : 'warning' }}-lt">{{ $row->status }}</span>
+                          </td>
+                          <td>{{ $row->created_at }}</td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                  @include("partial.pagination3")
                 </div>
               </div>
             </div>

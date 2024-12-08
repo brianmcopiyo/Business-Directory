@@ -15,6 +15,11 @@ class Business extends Model
     return $this->hasMany(Branch::class);
   }
 
+  public function products()
+  {
+    return $this->hasMany(Product::class);
+  }
+
   public function customer()
   {
     return $this->belongsTo(Customer::class);
