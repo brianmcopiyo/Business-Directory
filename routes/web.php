@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserSettingController;
 
 Route::prefix('auth')->group(function () {
@@ -49,6 +50,10 @@ Route::middleware('auth')->group(function () {
   Route::put('businesses/{id}/update', [BusinessController::class, "update_business"])->name('businesses.update');
   Route::get('branches/{id}/show', [BusinessController::class, "branches_show"])->name('businesses.show');
   Route::put('branches/{id}/update', [BusinessController::class, "branches_update"])->name('branches.update');
+
+  //Subscriptions
+  Route::get('subscriptions', [SubscriptionController::class, "index"])->name('subscriptions');
+  Route::put('subscriptions/{id}/update', [SubscriptionController::class, "update"])->name('subscriptions.update');
 
   Route::get('/roles-permissions', [RolePermissionController::class, 'index'])->name('roles-permissions');
   Route::post('/roles', [RolePermissionController::class, 'storeRole'])->name('roles.store');

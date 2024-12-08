@@ -10,5 +10,11 @@
         "name": "Customers",
         "icon": "ti ti-users",
         "type": ["Admin"]
+    },
+    {
+        "route": "subscriptions",
+        "name": "Subscription",
+        "icon": "ti ti-link",
+        "type": ["Admin"]
     }
 ]
