@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Middleware\APITokenMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -20,8 +21,12 @@ Route::post("login", [AuthController::class, "customer_login"]);
 Route::post("signup", [AuthController::class, "customer_signup"]);
 
 Route::middleware([APITokenMiddleware::class])->group(function () {
+  //Business
   Route::post('newbs', [BusinessController::class, "store"]);
   Route::post('newbr', [BusinessController::class, "new_brnach"]);
+
+  //Subscription
+  Route::post('renew', [SubscriptionController::class, "renew"]);
 });
 
 // Fallback

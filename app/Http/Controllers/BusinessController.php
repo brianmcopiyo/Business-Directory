@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\User;
 use App\Models\Business;
 use App\Models\Customer;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,15 +38,16 @@ class BusinessController extends Controller
 
     if ($user) {
       $customer = Customer::where('user_id', $user->id)->first();
+      $sub = Subscription::where('name', "Additional")->first();
 
-      if ($customer) {
+      if ($customer && $sub) {
         $business = Business::find($request->business);
-
         if ($business) {
+
           Branch::create([
             'name' => $request->name,
             'business_id' => $business->id,
-            'subscription_id' => $request->subscription
+            'subscription_id' => $sub->id
           ]);
 
           return response()->json(['msg' => "Success"], 200);

@@ -15,6 +15,11 @@ class Branch extends Model
     return $this->belongsTo(Business::class);
   }
 
+  public function subscription()
+  {
+    return $this->belongsTo(Subscription::class);
+  }
+
   public function customer()
   {
     return $this->business->customer;

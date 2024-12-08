@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('businesses', function (Blueprint $table) {
       $table->id();
       $table->string('name');
+      $table->dateTimeTz('duedate')->default(now());
       $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
       $table->foreignId('subscription_id')->constrained()->cascadeOnDelete();
       $table->string('status')->default('Active');

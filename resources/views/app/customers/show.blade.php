@@ -95,6 +95,8 @@ $layout = $settings->layout;
                     </th>
                     <th class="w-1"></th>
                     <th>Name</th>
+                    <th>Subscription</th>
+                    <th>Next Subscription In</th>
                     <th>Branches</th>
                     <th>Status</th>
                     <th>Created At</th>
@@ -109,6 +111,13 @@ $layout = $settings->layout;
                     </td>
                     <td><span class="text-secondary">{{ $count + 1 + (($table->currentPage() - 1) * 15) }}</span></td>
                     <td>{{ $row->name }}</td>
+                    <td>{{ $row->subscription->name }}</td>
+                    <td>
+                      @php
+                      $days = ceil(\Carbon\Carbon::now()->diffInDays($row->duedate, false));
+                      @endphp
+                      {{ $days }} {{ $days == 1 ? "Day" : "Days" }}
+                    </td>
                     <td>{{ $row->branches()->count() }}</td>
                     <td>{{ $row->status }}</td>
                     <td>{{ $row->created_at }}</td>
