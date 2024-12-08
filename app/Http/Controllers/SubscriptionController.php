@@ -61,7 +61,7 @@ class SubscriptionController extends Controller
 
 
         do {
-          $code = Str::random(64);
+          $code = Str::random(12);
         } while (Payment::where('identifier', $code)->first());
 
         $payment = Payment::create(['identifier' => $code, 'amount' => $amount, 'status' => "Complete", 'business_id' => $business->id]);
