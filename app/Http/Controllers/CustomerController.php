@@ -17,10 +17,9 @@ class CustomerController extends Controller
       ->orderByDesc('id');
     if (!empty($search)) {
       $users = $users->where(function ($query) use ($search) {
-        $query->where('name', 'like', "%$search%")
+        $query->where('user.name', 'like', "%$search%")
           ->orWhere('user.email', 'like', "%$search%")
           ->orWhere('phone', 'like', "%$search%")
-          ->orWhere('id_no', 'like', "%$search%")
           ->orWhere('status', 'like', "%$search%");
       });
     }

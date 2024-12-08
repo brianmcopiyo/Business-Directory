@@ -6,54 +6,9 @@
         "type": ["Admin"]
     },
     {
-        "name": "Users & Permissions",
-        "icon": "ti ti-users",
-        "type": ["Admin"],
-        "submenu": [
-            {
-                "route": "users",
-                "name": "Users List"
-            },
-            {
-                "route": "roles-permissions",
-                "name": "Roles & Permissions"
-            }
-        ]
-    },
-    {
+        "route": "customers",
         "name": "Customers",
         "icon": "ti ti-users",
-        "type": ["Admin"],
-        "submenu": [
-            {
-                "route": "customers",
-                "name": "Customers Accounts"
-            },
-            {
-                "route": "groups_accounts",
-                "name": "Groups Accounts"
-            }
-        ]
-    },
-    {
-        "name": "Transactions",
-        "icon": "ti ti-send",
-        "type": ["Admin"],
-        "submenu": [
-            {
-                "route": "transactions",
-                "name": "Transactions List"
-            },
-            {
-                "route": "transaction_types",
-                "name": "Transactions Type"
-            }
-        ]
-    },
-    {
-        "route": "savings",
-        "name": "Savings",
-        "icon": "ti ti-wallet",
         "type": ["Admin"]
     }
 ]

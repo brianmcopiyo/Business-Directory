@@ -12,24 +12,6 @@ $layout = $settings->layout;
 
 @section('title', "Customers")
 
-@section('search')
-<div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-  <form action="{{ route('customers') }}" autocomplete="off" novalidate="">
-    <div class="input-icon">
-      <span class="input-icon-addon">
-        <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-          <path d="M21 21l-6 -6"></path>
-        </svg>
-      </span>
-      <input type="text" name="search" value="{{ $search }}" class="form-control" placeholder="Search…" aria-label="Search in website">
-    </div>
-  </form>
-</div>
-@endsection
-
 @section('content')
 <div class="page-wrapper" style="margin-right: 0;">
   <!-- Page header -->
@@ -68,6 +50,24 @@ $layout = $settings->layout;
           </a>
         </div>
       </div>
+
+
+      <div class="my-2 pt-3 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+        <form action="{{ route('customers') }}" autocomplete="off" novalidate="">
+          <div class="input-icon">
+            <span class="input-icon-addon">
+              <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                <path d="M21 21l-6 -6"></path>
+              </svg>
+            </span>
+            <input type="text" name="search" value="{{ $search }}" class="form-control" placeholder="Search…" aria-label="Search in website">
+          </div>
+        </form>
+      </div>
+
       @if (Session::has('success'))
       <div class="mt-3">
         <div class="alert alert-success bg-white">
@@ -114,8 +114,8 @@ $layout = $settings->layout;
                       <input class="form-check-input m-0 align-middle rowCheckbox" type="checkbox" aria-label="Select invoice">
                     </td>
                     <td><span class="text-secondary">{{ $count + 1 + (($table->currentPage() - 1) * 15) }}</span></td>
-                    <td>{{ $row->name }}</td>
-                    <td>{{ $row->email }}</td>
+                    <td>{{ $row->user->name }}</td>
+                    <td>{{ $row->user->email }}</td>
                     <td>{{ $row->phone }}</td>
                     <td>{{ $row->status }}</td>
                     <td>{{ $row->created_at }}</td>

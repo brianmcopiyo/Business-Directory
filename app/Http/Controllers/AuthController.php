@@ -81,7 +81,6 @@ class AuthController extends Controller
     return redirect()->route("login");
   }
 
-
   public function customer_signup(Request $request)
   {
     $user = User::where("email", $request->email)->first();
