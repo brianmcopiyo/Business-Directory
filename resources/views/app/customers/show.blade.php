@@ -10,7 +10,7 @@ $layout = $settings->layout;
 
 @extends('layouts.app')
 
-@section('title', "Customers")
+@section('title', "Businessess")
 
 @section('content')
 <div class="page-wrapper" style="margin-right: 0;">
@@ -21,10 +21,10 @@ $layout = $settings->layout;
         <div class="col">
           <!-- Page pre-title -->
           <div class="page-pretitle">
-            Overview
+            Customers
           </div>
           <h2 class="page-title">
-            Customers
+            <a href="{{ route('customers') }}" class="btn btn-primary mr-3"> <i class="ti ti-chevron-left"></i></a> <span class="mx-2">{{ $customer->user->name }}</span>
           </h2>
         </div>
         <!-- Page title actions -->
@@ -43,11 +43,6 @@ $layout = $settings->layout;
             </div>
             @endif
           </div>
-
-          <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new">
-            <i class="ti ti-plus"></i>
-            Create
-          </a>
         </div>
       </div>
 
@@ -100,9 +95,7 @@ $layout = $settings->layout;
                     </th>
                     <th class="w-1"></th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Businesses</th>
+                    <th>Branches</th>
                     <th>Status</th>
                     <th>Created At</th>
                     <th></th>
@@ -115,23 +108,14 @@ $layout = $settings->layout;
                       <input class="form-check-input m-0 align-middle rowCheckbox" type="checkbox" aria-label="Select invoice">
                     </td>
                     <td><span class="text-secondary">{{ $count + 1 + (($table->currentPage() - 1) * 15) }}</span></td>
-                    <td>{{ $row->user->name }}</td>
-                    <td>{{ $row->user->email }}</td>
-                    <td>{{ $row->phone }}</td>
-                    <td>{{ $row->businesses_count }}</td>
+                    <td>{{ $row->name }}</td>
+                    <td>{{ $row->branches()->count() }}</td>
                     <td>{{ $row->status }}</td>
                     <td>{{ $row->created_at }}</td>
                     <td>
+                      @include('app.businesses.edit')
                       <div class="d-flex justify-content-end gap-2">
-                        <a href="{{route('customers.show', $row->id)  }}" class="btn btn-primary p-1 px-2">View</a>
-                        @include('app.customers.edit')
-                        @if($row->type != "Admin")
-                        @if ($row->status == "Suspended")
-                        <a href="{{route('users.activate', $row->id)  }}" class="btn btn-success p-1 px-2">Activate</a>
-                        @else
-                        <a href="{{route('users.suspend', $row->id)  }}" class="btn btn-warning p-1 px-2">Suspend</a>
-                        @endif
-                        @endif
+                        <a href="{{ route('businesses.show', $row->id) }}" class="btn btn-primary p-1 px-2">View</a>
                         <a href="javascript:void(0);" class="btn btn-warning p-1 px-2" data-bs-toggle="modal" data-bs-target="#update{{ $row->id }}">Edit</a>
                       </div>
                     </td>
@@ -146,6 +130,5 @@ $layout = $settings->layout;
       </div>
     </div>
   </div>
-  @include('app.customers.new')
 </div>
 @endsection

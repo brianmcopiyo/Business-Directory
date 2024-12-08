@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,9 @@ class CustomerController extends Controller
   public function index(Request $request)
   {
     $search = $request->search ?? "";
-    $users = Customer::query()->with('user:id,name,email,type,status')
+    $users = Customer::with(['user:id,name,email,type,status'])->withCount(['businesses'])
       ->orderByDesc('id');
+
     if (!empty($search)) {
       $users = $users->where(function ($query) use ($search) {
         $query->where('user.name', 'like', "%$search%")
@@ -23,6 +25,7 @@ class CustomerController extends Controller
           ->orWhere('status', 'like', "%$search%");
       });
     }
+
     $table = $users->paginate(25);
 
     return view('app.customers', compact('table', 'search'));
@@ -46,9 +49,20 @@ class CustomerController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(string $id)
+  public function show($id)
   {
-    //
+    $search = $request->search ?? "";
+
+    $customer = Customer::find($id);
+
+    if ($customer) {
+
+      $table = Business::orderByDesc('id')->paginate(25);
+
+      return view('app.customers.show', compact('table', 'customer', 'search'));
+    }
+
+    return back()->with('error', "This customer wasn't found.");
   }
 
   /**

@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Business extends Model
+class Branch extends Model
 {
   use HasFactory;
   protected $guarded = [];
 
-  public function branches()
+  public function business()
   {
-    return $this->hasMany(Branch::class);
+    return $this->belongsTo(Business::class);
   }
 
   public function customer()
   {
-    return $this->belongsTo(Customer::class);
+    return $this->business->customer;
   }
 }
